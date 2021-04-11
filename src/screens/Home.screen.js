@@ -13,7 +13,7 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <div className="container pt-5 d-flex align-items-stretch justify-content-center align-items-center">
+    <div className="container pt-5 d-flex justify-content-center align-items-center">
       <EmpSearchCard onSearch={handleSearch} />
     </div>
   );

@@ -46,10 +46,7 @@ const OverviewScreen = () => {
               <Spinner animation="border" />
             </div>
           )}
-          {/* No Results */}
-          {notifications?.length === 0 && finalData.current?.size === 0 && (
-            <h2>No results found.</h2>
-          )}
+          <h4>{finalData?.current.size} records found</h4>
           <ListGroup className="mx-auto text-center w-50 ">
             {[...finalData.current].map((item, i) => (
               <ListGroup.Item key={i}>{item}</ListGroup.Item>
