@@ -11,17 +11,13 @@ const ApiManager = {
     const obj = { ...defaultVal, ...arg };
     const { url } = obj;
 
-    try {
-      const response = await fetch(url);
-      if (response.ok) {
-        return await response.json();
-      } else if (response.status === 404) {
-        throw new Error(response.statusText);
-      } else {
-        throw new Error(response.status);
-      }
-    } catch (error) {
-      throw new Error(error);
+    const response = await fetch(url);
+    if (response.ok) {
+      return await response.json();
+    } else if (response.status === 404) {
+      throw new Error(response.statusText);
+    } else {
+      throw new Error(response.status);
     }
   },
 };

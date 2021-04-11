@@ -55,7 +55,7 @@ const EmpSearchCard = ({ onSearch }) => {
             </Form.Row>
           </Form>
           <br />
-          {notifications && notifications.length > 0 && (
+          {notifications?.length > 0 && (
             <Alert data={notifications} />
           )}
         </Card.Body>

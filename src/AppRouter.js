@@ -1,32 +1,40 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import OverviewScreen from "./screens/Overview.screen";
 import HomeScreen from "./screens/Home.screen";
+import OverviewScreen from "./screens/Overview.screen";
 import NoMatch404Screen from "./screens/NoMatch404.screen";
 
-/* const routes = [
+const routesConfig = [
   {
     path: "/",
-    component: Home,
+    component: HomeScreen,
+    exact: true,
   },
   {
-    path: "/overview",
-    component: Overview,
+    path: "/overview/:name",
+    component: OverviewScreen,
   },
   {
     path: "*",
-    component: NoMatch404,
+    component: NoMatch404Screen,
   },
-]; */
+];
 
 const AppRouter = () => {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" children={<HomeScreen />} />
-        <Route path="/overview/:name" children={<OverviewScreen />} />
-        <Route path="*" children={<NoMatch404Screen />} />
+        {routesConfig.map((route, i) => (
+          <Route
+            key={i}
+            {...route}
+            path={route.path}
+            render={(props) => (
+              <route.component {...props} routes={route.routes} />
+            )}
+          />
+        ))}
       </Switch>
     </Router>
   );

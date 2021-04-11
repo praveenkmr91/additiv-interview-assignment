@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { fetchEmpData } from "../services/Emp.service";
 
-const useSubOrdinatesGet = (id = []) => {
+const useFetchSubOrdinates = (id = []) => {
   const [names, setNames] = useState(id);
-  const [error, setError] = useState(false);
+  const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
 
@@ -13,21 +13,21 @@ const useSubOrdinatesGet = (id = []) => {
 
   const handleError = (error) => {
     console.log("e", error);
-    setError(true);
+    setNotifications([{ type: "error", text: error.message }]);
   };
 
   useEffect(() => {
     if (names?.length > 0) {
       const loadData = async () => {
         setLoading(true);
-        setError(false);
+        setNotifications([]);
         try {
           for (const name of names) {
             const empData = await fetchEmpData(name);
             setData(computeDirectSubOrdinates(empData));
           }
-        } catch (error) {
-          handleError();
+        } catch (err) {
+          handleError(err);
         }
         setLoading(false);
       };
@@ -36,7 +36,7 @@ const useSubOrdinatesGet = (id = []) => {
     }
   }, [names]);
 
-  return { data, loading, error, setNames };
+  return { data, loading, notifications, setNames };
 };
 
-export default useSubOrdinatesGet;
+export default useFetchSubOrdinates;

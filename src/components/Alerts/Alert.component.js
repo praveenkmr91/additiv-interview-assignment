@@ -5,6 +5,7 @@ const NotifAlert = ({ data }) => {
   const typeToVariantMapper = {
     "": "primary",
     success: "success",
+    warning: "warning",
     error: "danger",
     info: "info",
   };

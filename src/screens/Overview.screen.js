@@ -1,14 +1,19 @@
 import React, { useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
+import useFetchSubOrdinates from "../hooks/useFetchSubOrdinates";
+//bootstrap
 import ListGroup from "react-bootstrap/ListGroup";
-import useSubOrdinatesGet from "../hooks/useSubOrdinatesGet";
 import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
+// app component
+import Alert from "../components/Alerts/Alert.component";
 
 const OverviewScreen = () => {
   const { name: empName } = useParams();
-  const { data, error, loading, setNames } = useSubOrdinatesGet([empName]);
-  let finalData = useRef(new Set([]));
+  const { data, notifications, loading, setNames } = useFetchSubOrdinates([
+    empName,
+  ]);
+  let finalData = useRef(new Set([])); //  to prevent duplicates
 
   useEffect(() => {
     if (data?.length > 0) {
@@ -33,13 +38,18 @@ const OverviewScreen = () => {
             All Subordinates (direct & in-direct) of employee: {empName}
           </Card.Text>
           <br />
-          {error && <h1>something wrong man...</h1>}
+          {/* Error */}
+          {notifications?.length > 0 && <Alert data={notifications} />}
+          {/* Loading */}
           {loading && (
             <div className="mx-auto text-center">
               <Spinner animation="border" />
             </div>
           )}
-          {finalData.current?.size === 0 && <h2>No results found.</h2>}
+          {/* No Results */}
+          {notifications?.length === 0 && finalData.current?.size === 0 && (
+            <h2>No results found.</h2>
+          )}
           <ListGroup className="mx-auto text-center w-50 ">
             {[...finalData.current].map((item, i) => (
               <ListGroup.Item key={i}>{item}</ListGroup.Item>
