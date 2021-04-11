@@ -15,7 +15,8 @@ import Alert from "../Alerts/Alert.component";
 // validations
 import { checkIfEmpty } from "../../utilities/FormValidations.util";
 
-const EmpSearchCard = ({ onSearch }) => {
+const EmpSearchCard = ({ onSearch, helpTextComp }) => {
+  console.log(helpTextComp);
   const [searchText, setSearchText] = useState("");
   const [notifications, setNotifications] = useState([]);
 
@@ -59,6 +60,9 @@ const EmpSearchCard = ({ onSearch }) => {
             <Alert data={notifications} />
           )}
         </Card.Body>
+        <div>
+          Example: Search with <code>'John Hartman'</code>
+        </div>
       </Card>
     </div>
   );
