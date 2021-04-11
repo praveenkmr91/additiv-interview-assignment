@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { fetchEmpData } from "../services/Emp.service";
 
 const useSubOrdinatesGet = (id = []) => {
@@ -18,7 +18,6 @@ const useSubOrdinatesGet = (id = []) => {
 
   useEffect(() => {
     if (names?.length > 0) {
-      console.log("useEffect ", names);
       const loadData = async () => {
         setLoading(true);
         setError(false);
@@ -40,5 +39,4 @@ const useSubOrdinatesGet = (id = []) => {
   return { data, loading, error, setNames };
 };
 
-// export default React.memo(useSubOrdinatesGet);
 export default useSubOrdinatesGet;

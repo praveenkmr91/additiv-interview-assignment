@@ -5,7 +5,7 @@ import useSubOrdinatesGet from "../hooks/useSubOrdinatesGet";
 import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
 
-const Overview = () => {
+const OverviewScreen = () => {
   const { name: empName } = useParams();
   const { data, error, loading, setNames } = useSubOrdinatesGet([empName]);
   let finalData = useRef(new Set([]));
@@ -51,4 +51,4 @@ const Overview = () => {
   );
 };
 
-export default Overview;
+export default OverviewScreen;

@@ -4,12 +4,11 @@ import { useHistory } from "react-router-dom";
 // app comps
 import EmpSearchCard from "../components/EmpSearchCard/EmpSearchCard.component";
 
-const Home = () => {
+const HomeScreen = () => {
   const history = useHistory();
 
   // handler for emp search
   const handleSearch = React.useCallback((term) => {
-    console.log(term);
     history.push(`/overview/${term}`);
   }, []);
 
@@ -20,4 +19,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeScreen;
