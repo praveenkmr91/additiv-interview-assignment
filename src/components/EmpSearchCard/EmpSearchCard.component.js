@@ -75,4 +75,4 @@ EmpSearchCard.defaultProps = {
   onSearch: () => {},
 };
 
-export default React.memo(EmpSearchCard);
+export default (EmpSearchCard);
